@@ -1,5 +1,7 @@
 description = "Spring Security SAML DSL Library"
 
+apply from: 'archive.gradle'
+
 dependencies {
 
     compile(

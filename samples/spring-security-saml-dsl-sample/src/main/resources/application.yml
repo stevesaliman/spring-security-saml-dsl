@@ -1,11 +1,21 @@
+#server:
+#  port: 8443
+#  ssl:
+#    enabled: true
+#    key-alias: spring
+#    key-store: src/main/resources/saml/keystore.jks
+#    key-store-password: secret
 server:
-  port: 8443
-  ssl:
-    enabled: true
-    key-alias: spring
-    key-store: src/main/resources/saml/keystore.jks
-    key-store-password: secret
+  port: 8080
 
 security:
   saml2:
-      metadata-url: https://dev-348145.oktapreview.com/app/exk6bmtlqpOBRo4a20h7/sso/saml/metadata
+#      metadata-url: https://dev-348145.oktapreview.com/app/exk6bmtlqpOBRo4a20h7/sso/saml/metadata
+    metadata-url: http://keycloak.tracom.com:8080/auth/realms/AxtionToys_QA/protocol/saml/descriptor
+
+logging:
+  level:
+    root: WARN
+    org.springframework.security: ERROR
+    org.springframework.security.saml: DEBUG
+    org.opensaml: DEBUG
