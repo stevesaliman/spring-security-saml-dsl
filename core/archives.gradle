@@ -1,0 +1,29 @@
+def mavenRepoUploadUrl = "scp://maxdevcloud.tracom.com/var/www/maven/repo"
+def mavenRepoUploadUser = "git"
+
+apply plugin: 'maven'
+configurations {
+  archives
+}
+
+dependencies {
+	// Dependencies needed to upload to a maven reposotory.
+	archives "org.apache.maven.wagon:wagon-ssh:2.2"
+	archives "org.apache.maven.wagon:wagon-ssh-external:2.2"
+}
+
+uploadArchives {
+  doFirst {
+    repositories {
+      mavenDeployer {
+        configuration = configurations.archives
+        repository(url: mavenRepoUploadUrl) {
+          authentication(userName: mavenRepoUploadUser,
+                   privateKey: file("${privateKeyFile}"),
+                   passphrase: "${privateKeyPassphrase}")
+        }
+      }
+    }
+  }
+}
+
